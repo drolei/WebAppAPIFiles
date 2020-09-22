@@ -1,0 +1,36 @@
+﻿@model FilesListViewModels
+<h2>Welcome @ViewBag.Login </h2>
+<h3>загружайте файлы в формате .zip</h3>
+<html>
+
+<head>
+          
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-md navbar-dark  bg-dark">
+
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <ul>
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="Account" asp-action="Logout">Logout</a>
+                </li>
+            </ul>
+
+        </div>
+        <h3>Выберите файл для загрузки</h3>
+        <form asp-action="AddFile" asp-controller="Home" method="post" enctype="multipart/form-data">
+            <input type="file" name="uploadedFile" /><br>
+            <input type="submit" value="Загрузить" />
+        </form>
+    </nav>
+    <div class="container">
+        @foreach (var item in Model.GetAllFiles)
+        {
+            @await Html.PartialAsync("File", item)
+        }
+    </div>
+</body>
+
+</html>

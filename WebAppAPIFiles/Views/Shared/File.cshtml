@@ -1,0 +1,9 @@
+﻿@model Files
+
+<div class="alert alert-warning mt-3">
+
+    <b>Name: </b> @Model.Name <br />   
+    <a class="btn btn-warning" asp-controller="Home" asp-action="GetVirtualFile"
+       asp-route-id="@Model.Id"> download </a>
+
+</div>
