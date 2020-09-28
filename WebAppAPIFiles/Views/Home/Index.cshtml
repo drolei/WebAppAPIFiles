@@ -1,10 +1,13 @@
 ﻿@model FilesListViewModels
 <h2>Welcome @ViewBag.Login </h2>
-<h3>загружайте файлы в формате .zip</h3>
+<h3>upload files in format .zip</h3>
 <html>
 
 <head>
-          
+    <script src="C:\Users\denis lipatov\.nuget\packages\bootstrap\4.5.2\contentFiles\any\any\wwwroot\js\bootstrap.js"></script>
+    <link href="C:\Users\denis lipatov\.nuget\packages\bootstrap\4.5.2\contentFiles\any\any\wwwroot\css\bootstrap-grid.css" rel="stylesheet" />
+    <link href="C:\Users\denis lipatov\.nuget\packages\bootstrap\4.5.2\contentFiles\any\any\wwwroot\css\bootstrap-reboot.css" rel="stylesheet" />
+    <link href="C:\Users\denis lipatov\.nuget\packages\bootstrap\4.5.2\contentFiles\any\any\wwwroot\css\bootstrap.css" rel="stylesheet" />
 </head>
 
 <body>
@@ -19,10 +22,10 @@
             </ul>
 
         </div>
-        <h3>Выберите файл для загрузки</h3>
+        <h3>Select file to download</h3>
         <form asp-action="AddFile" asp-controller="Home" method="post" enctype="multipart/form-data">
             <input type="file" name="uploadedFile" /><br>
-            <input type="submit" value="Загрузить" />
+            <input type="submit" value="Upload" />
         </form>
     </nav>
     <div class="container">

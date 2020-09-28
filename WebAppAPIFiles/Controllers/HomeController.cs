@@ -34,10 +34,11 @@ namespace WebAppAPIFiles.Controllers
 
         public IActionResult Index()
         {
-            ViewBag.Title = "start page";
-            ViewBag.Login = User.Identity.Name;
-            
             var currentUserID = User.Identity.Name;
+            ViewBag.Title = "start page";
+            ViewBag.Login = _iuser.AllUsers.First(i => i.Email == currentUserID).GivenName;
+            
+            
             IEnumerable<Files> files = null;
 
             files = _ifiles.AllFiles.Where(i => i.User.Email == currentUserID );
@@ -60,10 +61,13 @@ namespace WebAppAPIFiles.Controllers
             var currentUserid = _iuser.AllUsers.First(i => i.Email == User.Identity.Name);
             if (uploadedFile != null)
             {
-                // путь к папке Files
-                string path = "/Files/" + uploadedFile.FileName;
-                // сохраняю файл в папку Files в каталоге wwwroot
-                using (var fileStream = new FileStream(_appEnvironment.WebRootPath + path, FileMode.Create))
+                string path = _appEnvironment.WebRootPath + $"/Files/{currentUserid.Email}/";
+                Directory.CreateDirectory(path);
+
+                // The path to the folder Files
+                path += uploadedFile.FileName;
+                // I save the file to a folder Files in the catalog wwwroot
+                using (var fileStream = new FileStream( path, FileMode.Create))
                 {
                     await uploadedFile.CopyToAsync(fileStream);
                 }
@@ -78,9 +82,9 @@ namespace WebAppAPIFiles.Controllers
         public VirtualFileResult GetVirtualFile(Guid id)
         {
             var file = _ifiles.AllFiles.First(i => i.Id == id);
-            // Путь к файлу
+            // Path to the file
             string file_path = Path.Combine("~", file.Path);
-            // Тип файла - content-type
+            // Type file - content-type
             string file_type = "application/zip";
             
             return File(file_path, file_type);

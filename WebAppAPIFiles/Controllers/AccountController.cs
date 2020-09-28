@@ -38,8 +38,12 @@ namespace WebAppAPIFiles.Controllers
 
                     return RedirectToAction("Index", "Home");
                 }
-                ModelState.AddModelError("", "Некорректные Email or Phone и(или) пароль");
+                
+                
+
             }
+            ModelState.AddModelError("", "Invalid Email or Phone and(or) password");
+            
             return View(model);
         }
 
